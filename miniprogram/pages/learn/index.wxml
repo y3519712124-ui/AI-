@@ -1,0 +1,71 @@
+<view class="page">
+  <view class="time">{{currentTime}}</view>
+  <view class="title">财商修炼场</view>
+  
+  <view class="card top">
+    <view class="badge">{{assessment ? assessment.sampleText : '暂无测评样本'}}</view>
+    <view class="top-title">财务健康度测评</view>
+    <view class="top-desc">基于AI算法，从消费、储蓄、投资、风险四个维度评估你的财商等级。</view>
+    <view class="score-container">
+      <view class="score-circle">{{assessment ? assessment.score : '--'}}</view>
+      <view class="score-info">
+        <view class="score-level">{{assessment ? assessment.level : '完成测评后展示等级'}}</view>
+        <view class="score-rank">{{assessment ? assessment.rankText : '暂无排名数据'}}</view>
+      </view>
+    </view>
+    <view class="reassess-btn" bindtap="reassess">重新测评</view>
+  </view>
+
+  <view class="section-title">知识闯关 <text class="score-right">积分：{{points !== null ? points : '--'}}</text></view>
+  <view class="card challenge-wrap">
+    <view class="challenge-item" wx:for="{{challenges}}" wx:key="id" data-id="{{item.id}}" bindtap="onChallengeTap">
+      <view class="challenge-icon">
+        <image class="challenge-icon-img" src="{{item.iconPath}}" mode="aspectFit"></image>
+      </view>
+      <view class="challenge-name">{{item.name}}</view>
+      <view class="challenge-stars" wx:if="{{item.stars}}">
+        <text wx:for="{{5}}" wx:key="index" class="star {{index < item.stars ? 'active' : ''}}">★</text>
+      </view>
+      <view wx:if="{{item.status === '已通关'}}" class="challenge-status done">已通关</view>
+      <view wx:else class="challenge-btn">{{item.status}}</view>
+    </view>
+  </view>
+
+  <view class="section-title">科普知识库</view>
+  <scroll-view class="tag-scroll" scroll-x="true" show-scrollbar="false">
+    <view class="tag-row">
+      <view
+        wx:for="{{knowledgeTags}}"
+        wx:key="*this"
+        class="tag-chip {{selectedTag===item ? 'tag-active' : ''}}"
+        data-tag="{{item}}"
+        bindtap="onSelectTag"
+      >
+        {{item}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="card article" wx:for="{{filteredArticles}}" wx:key="id" data-id="{{item.id}}" bindtap="openArticle">
+    <view class="article-row">
+      <image class="article-thumb" src="/images/learn-icons/article.svg" mode="aspectFill"></image>
+      <view class="article-main">
+        <view class="article-title">{{item.title}}</view>
+        <view class="article-desc">{{item.desc}}</view>
+        <view class="article-meta">#{{item.tag}} {{item.time}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{!filteredArticles.length}}" class="empty">当前分类暂无内容</view>
+
+  <view wx:if="{{showArticlePanel}}" class="mask" bindtap="closeArticlePanel"></view>
+  <view wx:if="{{showArticlePanel}}" class="article-panel">
+    <view class="article-panel-title">{{currentArticle.title}}</view>
+    <view class="article-panel-meta">#{{currentArticle.tag}} {{currentArticle.time}}</view>
+    <scroll-view class="article-panel-content" scroll-y="true">
+      <view class="article-panel-text">{{currentArticle.content}}</view>
+    </scroll-view>
+    <view class="article-panel-btn" bindtap="closeArticlePanel">我知道了</view>
+  </view>
+</view>

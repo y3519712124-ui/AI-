@@ -1,0 +1,55 @@
+<view class="page">
+  <view class="time">{{currentTime}}</view>
+  <view class="header">
+    <view class="title">目标管理</view>
+    <view class="add-btn" bindtap="addGoal">
+      <image class="add-btn-icon" src="/images/goal-icons/plus.svg" mode="aspectFit"></image>
+    </view>
+  </view>
+  
+  <view class="summary-card">
+    <view class="summary-title">当前梦想达成度</view>
+    <view class="summary-value">{{progressText}} <text class="growth">+{{growth}}% 本月</text></view>
+    <view class="progress-container">
+      <view class="progress-bg">
+        <view class="progress-bar" style="width: {{progress}}%;"></view>
+      </view>
+    </view>
+    <view class="summary-tip">AI预测：基于真实账单动态更新目标进度。</view>
+  </view>
+
+  <view class="block-title">正在进行中</view>
+  <view wx:if="{{!goals.length}}" class="card empty-goal">暂未设置目标，请先添加目标。</view>
+  <view class="card goal-item" wx:for="{{goals}}" wx:key="name">
+    <view class="goal-header">
+      <view class="goal-icon">
+        <image class="goal-icon-img" src="{{item.iconPath}}" mode="aspectFit"></image>
+      </view>
+      <view class="goal-row">
+        <view class="goal-name">{{item.name}}</view>
+        <view class="goal-percent">{{item.percent}}%</view>
+      </view>
+    </view>
+    <view class="goal-note">目标: ¥{{item.target}} | 已存: ¥{{item.current}}</view>
+    <view class="progress-bg">
+      <view class="progress-bar" style="width: {{item.percent}}%; background: {{item.color}};"></view>
+    </view>
+    <view wx:if="{{item.aiTip}}" class="ai-tip">
+      <image class="ai-icon-img" src="/images/goal-icons/spark.svg" mode="aspectFit"></image>
+      {{item.aiTip}}
+    </view>
+    <view wx:if="{{item.estimate}}" class="estimate">预计{{item.estimate}}达成</view>
+  </view>
+</view>
+
+<!-- 添加目标面板 -->
+<view wx:if="{{showAddPanel}}" class="mask" bindtap="closeAddPanel"></view>
+<view wx:if="{{showAddPanel}}" class="panel">
+  <view class="panel-title">添加目标</view>
+  <scroll-view class="panel-content" scroll-y="true">
+    <input class="panel-input" placeholder="目标名称" value="{{newGoal.name}}" bindinput="onGoalNameInput" />
+    <input class="panel-input" type="digit" placeholder="目标金额" value="{{newGoal.target}}" bindinput="onGoalTargetInput" />
+    <input class="panel-input" type="digit" placeholder="当前已存金额" value="{{newGoal.current}}" bindinput="onGoalCurrentInput" />
+    <view class="panel-btn" bindtap="saveGoal">保存目标</view>
+  </scroll-view>
+</view>

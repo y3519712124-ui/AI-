@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="nav-title">AI智财助手</view>
+  <view class="title">手动记账</view>
+  <view class="subtitle">快速记录每一笔消费与收入</view>
+  <view class="card">
+    <view class="type-row">
+      <view
+        wx:for="{{typeOptions}}"
+        wx:key="value"
+        class="type-item {{type === item.value ? 'active' : ''}}"
+        data-type="{{item.value}}"
+        bindtap="switchType"
+      >
+        {{item.label}}
+      </view>
+    </view>
+
+    <view class="field">
+      <view class="label">金额</view>
+      <input class="input" type="digit" value="{{amount}}" placeholder="请输入金额" placeholder-class="placeholder" bindinput="onAmountInput" />
+    </view>
+
+    <view class="field">
+      <view class="label">分类</view>
+      <picker mode="selector" range="{{categories}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker">{{categories[categoryIndex]}}</view>
+      </picker>
+    </view>
+
+    <view class="field">
+      <view class="label">备注</view>
+      <textarea class="textarea" placeholder="可选，记录用途" placeholder-class="placeholder" value="{{note}}" bindinput="onNoteInput" maxlength="60"></textarea>
+    </view>
+
+    <button class="submit-btn" bindtap="submitRecord">保存记录</button>
+  </view>
+</view>

@@ -1,0 +1,116 @@
+<scroll-view class="page" scroll-y="true">
+  <view class="hero">
+    <view>
+      <view class="hello">你好，小财！👋</view>
+      <view class="date">{{displayDate}}</view>
+    </view>
+    <view class="avatar">
+      <image src="../../images/icons/caishen.png" class="avatar-img" />
+      <view class="avatar-badge"></view>
+    </view>
+  </view>
+
+  <view class="card balance-card">
+    <view class="balance-header">
+      <view class="label">本月结余（元）</view>
+      <view class="wallet-icon">💰</view>
+    </view>
+    <view class="balance">¥{{dashboard.balance}}</view>
+    <view class="row">
+      <view>
+        <view class="sub-label">本月支出</view>
+        <view class="sub-value">¥{{dashboard.expense}}</view>
+      </view>
+      <view>
+        <view class="sub-label">本月收入</view>
+        <view class="sub-value">¥{{dashboard.income}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card action-grid">
+    <view
+      class="action-item"
+      wx:for="{{quickActions}}"
+      wx:key="name"
+      data-action="{{item.action}}"
+      bindtap="onActionTap"
+    >
+      <view class="action-dot" style="background: {{item.bg}};">
+        <image class="action-icon" src="{{item.iconPath}}" mode="aspectFit"></image>
+      </view>
+      <view>{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="card warn-card">
+    <view class="warn-icon-wrap">
+      <view class="warn-icon">!</view>
+    </view>
+    <view class="warn-content">
+      <view class="warn-title">{{warn.title}}</view>
+      <view class="warn-desc">{{warn.desc}}</view>
+    </view>
+  </view>
+
+  <view class="card list-card">
+    <view class="title-row">
+      <view class="title">今日消费</view>
+      <view class="link" bindtap="goRecord">查看全部</view>
+    </view>
+    <view wx:if="{{!displayRecords.length}}" class="empty">暂无记录，先记一笔吧</view>
+    <view wx:for="{{displayRecords}}" wx:key="_id" class="record-item">
+      <view class="record-left">
+        <view class="record-icon record-icon-{{item.iconType}}">
+          <text class="record-icon-text">{{item.iconSymbol}}</text>
+        </view>
+        <view>
+          <view class="record-title">{{item.category}}</view>
+          <view class="record-note">{{item.time}} · {{item.note || '支出记录'}}</view>
+        </view>
+      </view>
+      <view class="expense">{{item.amountText}}</view>
+    </view>
+  </view>
+  <button class="export-btn" bindtap="exportCsv">导出CSV</button>
+
+  <view wx:if="{{showManualPanel || showVoicePanel || showDetailPanel}}" class="mask" bindtap="onMaskTap"></view>
+
+  <view wx:if="{{showManualPanel}}" class="panel">
+    <view class="panel-title">手动记账</view>
+    <view class="seg">
+      <view class="seg-item {{manualType==='expense' ? 'seg-active' : ''}}" data-type="expense" bindtap="switchManualType">支出</view>
+      <view class="seg-item {{manualType==='income' ? 'seg-active' : ''}}" data-type="income" bindtap="switchManualType">收入</view>
+    </view>
+    <input class="panel-input" type="digit" placeholder="请输入金额" value="{{manualAmount}}" bindinput="onManualAmountInput" />
+    <picker mode="selector" range="{{categoryOptions}}" value="{{manualCategoryIndex}}" bindchange="onManualCategoryChange">
+      <view class="panel-input">{{categoryOptions[manualCategoryIndex]}}</view>
+    </picker>
+    <textarea class="panel-textarea" placeholder="备注（可选）" value="{{manualNote}}" bindinput="onManualNoteInput"></textarea>
+    <button class="panel-btn" bindtap="submitManualRecord">保存记录</button>
+  </view>
+
+  <view wx:if="{{showVoicePanel}}" class="panel">
+    <view class="panel-title">语音记账</view>
+    <view class="panel-tip">点击下方按钮开始录音（示例：今天餐饮美食花了28元）</view>
+    <textarea class="panel-textarea" placeholder="语音转写内容..." value="{{voiceText}}" bindinput="onVoiceTextInput"></textarea>
+    <button class="record-btn" bindtap="{{isRecording ? 'stopRecord' : 'startRecord'}}">
+      {{isRecording ? '停止录音' : '开始录音'}}
+    </button>
+    <button class="panel-btn" bindtap="parseVoiceAndSave">解析并保存</button>
+  </view>
+
+  <view wx:if="{{showDetailPanel}}" class="panel">
+    <view class="panel-title">账单明细</view>
+    <view class="filter-row">
+      <view class="filter-item {{detailFilter==='all'?'f-active':''}}" data-filter="all" bindtap="setDetailFilter">全部</view>
+      <view class="filter-item {{detailFilter==='expense'?'f-active':''}}" data-filter="expense" bindtap="setDetailFilter">支出</view>
+      <view class="filter-item {{detailFilter==='income'?'f-active':''}}" data-filter="income" bindtap="setDetailFilter">收入</view>
+    </view>
+    <view wx:if="{{!detailRecords.length}}" class="empty">暂无明细</view>
+    <view wx:for="{{detailRecords}}" wx:key="_id" class="detail-item">
+      <text>{{item.category}}</text>
+      <text>{{item.type === 'income' ? '+' : '-'}}{{item.amount}}</text>
+    </view>
+  </view>
+</scroll-view>

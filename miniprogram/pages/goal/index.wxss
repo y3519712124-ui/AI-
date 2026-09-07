@@ -1,0 +1,271 @@
+.page {
+  padding: 24rpx;
+  background: #f4f7fb;
+}
+
+.time {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24rpx;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 700;
+}
+
+.add-btn {
+  width: 64rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn-icon {
+  width: 64rpx;
+  height: 64rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(24, 56, 109, 0.06);
+  margin-bottom: 16rpx;
+}
+
+.summary-card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 26rpx;
+  box-shadow: 0 8rpx 24rpx rgba(24, 56, 109, 0.06);
+  margin-bottom: 24rpx;
+}
+
+.summary-title {
+  color: #7a8499;
+  font-size: 24rpx;
+}
+
+.summary-value {
+  font-size: 62rpx;
+  font-weight: 700;
+  margin: 10rpx 0;
+}
+
+.growth {
+  font-size: 34rpx;
+  color: #20b66d;
+}
+
+.progress-container {
+  margin: 16rpx 0;
+}
+
+.progress-bg {
+  height: 14rpx;
+  border-radius: 20rpx;
+  background: #e8edf3;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #16b77d, #25d69a);
+  border-radius: 20rpx;
+}
+
+.summary-tip {
+  margin-top: 12rpx;
+  color: #7a8499;
+  font-size: 22rpx;
+}
+
+.block-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin: 24rpx 0 14rpx;
+}
+
+.goal-item {
+  position: relative;
+}
+
+.goal-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 8rpx;
+}
+
+.goal-icon {
+  width: 58rpx;
+  height: 58rpx;
+}
+
+.goal-icon-img {
+  width: 58rpx;
+  height: 58rpx;
+}
+
+.ai-icon-img {
+  width: 28rpx;
+  height: 28rpx;
+  margin-top: 2rpx;
+}
+
+.ai-tip {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.goal-row {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.goal-name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.goal-percent {
+  color: #2d6cff;
+  font-weight: 700;
+  font-size: 28rpx;
+}
+
+.goal-note {
+  color: #7a8499;
+  margin: 8rpx 0 12rpx;
+  font-size: 24rpx;
+}
+
+.ai-tip {
+  margin-top: 16rpx;
+  padding: 12rpx 16rpx;
+  background: #f0f7ff;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  color: #1d5fff;
+  display: flex;
+  align-items: flex-start;
+  gap: 8rpx;
+}
+
+.estimate {
+  margin-top: 12rpx;
+  font-size: 22rpx;
+  color: #20b66d;
+  text-align: right;
+}
+
+.empty-goal {
+  color: #8a94a6;
+  font-size: 26rpx;
+  text-align: center;
+  padding: 40rpx 0;
+}
+
+/* 添加目标面板样式 */
+.mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+.panel {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: calc(132rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  border-radius: 28rpx;
+  padding: 24rpx 22rpx 16rpx;
+  z-index: 1000;
+  box-shadow: 0 12rpx 32rpx rgba(0, 0, 0, 0.18);
+  box-sizing: border-box;
+  max-height: calc(100vh - 240rpx);
+  overflow: hidden;
+}
+
+.panel-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 14rpx;
+  flex-shrink: 0;
+}
+
+.panel-content {
+  display: block;
+  overflow-y: auto;
+  max-height: calc(100vh - 360rpx);
+  padding-bottom: 8rpx;
+}
+
+.panel-input {
+  background: #f4f6f9;
+  border-radius: 16rpx;
+  height: 76rpx;
+  line-height: 76rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  margin: 10rpx 0 0;
+  width: 100%;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+.panel-input:focus {
+  background: #e8f0fe;
+  box-shadow: 0 0 0 2rpx rgba(29, 95, 255, 0.1);
+}
+
+/* 确保占位符也能正常显示中文 */
+.panel-input::placeholder {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: #999;
+  font-size: 30rpx;
+  line-height: 76rpx;
+}
+
+.panel-btn {
+  margin: 16rpx 0 0;
+  height: 82rpx;
+  line-height: 82rpx;
+  border-radius: 45rpx;
+  background: linear-gradient(135deg, #16b8c8, #1f6bff);
+  color: #fff;
+  font-size: 32rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 12rpx 24rpx rgba(22, 184, 200, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 8rpx 16rpx rgba(22, 184, 200, 0.2);
+}

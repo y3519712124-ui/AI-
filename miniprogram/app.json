@@ -1,0 +1,52 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/record/index",
+    "pages/analysis/index",
+    "pages/goal/index",
+    "pages/learn/index"
+  ],
+  "window": {
+    "backgroundColor": "#F7F9FC",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F7F9FC",
+    "navigationBarTitleText": "AI智财助手",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#8A8A8A",
+    "selectedColor": "#16A085",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/analysis/index",
+        "text": "分析"
+      },
+      {
+        "pagePath": "pages/goal/index",
+        "text": "目标"
+      },
+      {
+        "pagePath": "pages/learn/index",
+        "text": "学习"
+      }
+    ]
+  },
+  "permission": {
+    "scope.camera": {
+      "desc": "用于拍照识别账单"
+    },
+    "scope.record": {
+      "desc": "用于语音记账"
+    }
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

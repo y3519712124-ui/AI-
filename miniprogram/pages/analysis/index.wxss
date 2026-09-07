@@ -1,0 +1,417 @@
+.page {
+  padding: 24rpx;
+  background: #f4f7fb;
+}
+
+.time {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin-bottom: 16rpx;
+}
+
+.top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 700;
+  margin: 20rpx 0;
+}
+
+.toggle {
+  padding: 8rpx 22rpx;
+  border-radius: 999rpx;
+  background: transparent;
+  color: #4d5f80;
+  font-size: 24rpx;
+}
+
+.toggle-wrap {
+  display: flex;
+  background: #f0f3f8;
+  border-radius: 999rpx;
+  padding: 6rpx;
+}
+
+.toggle.active {
+  background: #fff;
+  color: #1f2430;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 8rpx 24rpx rgba(24, 56, 109, 0.06);
+  margin-bottom: 18rpx;
+}
+
+.head {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.head-icon {
+  width: 34rpx;
+  height: 34rpx;
+  border-radius: 10rpx;
+  display: inline-block;
+  position: relative;
+}
+
+.head-icon-img {
+  width: 34rpx;
+  height: 34rpx;
+  display: block;
+}
+
+.ai-config {
+  margin-left: auto;
+  font-size: 22rpx;
+  color: #1d5fff;
+  background: #e6f0ff;
+  padding: 4rpx 12rpx;
+  border-radius: 16rpx;
+}
+
+.line-card {
+  margin-top: 4rpx;
+}
+
+.today-income-card {
+  margin-top: -4rpx;
+}
+
+.today-row {
+  display: flex;
+  gap: 12rpx;
+}
+
+.today-item {
+  flex: 1;
+  background: #f6f8fc;
+  border-radius: 14rpx;
+  padding: 14rpx;
+}
+
+.today-label {
+  color: #7a8499;
+  font-size: 22rpx;
+}
+
+.today-income,
+.today-expense,
+.today-balance {
+  margin-top: 6rpx;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.today-income {
+  color: #16a34a;
+}
+
+.today-expense {
+  color: #ff7a45;
+}
+
+.today-balance {
+  color: #1d5fff;
+}
+
+.line-wrap {
+  margin-top: 16rpx;
+  position: relative;
+  height: 220rpx;
+  background: linear-gradient(180deg, #f9fbfe, #fff);
+  border-radius: 16rpx;
+  padding: 12rpx 14rpx;
+}
+
+.grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: linear-gradient(to right, #e8eef5 1px, transparent 1px),
+                    linear-gradient(to bottom, #e8eef5 1px, transparent 1px);
+  background-size: 60rpx 40rpx;
+  border-radius: 16rpx;
+}
+
+.line-container {
+  position: relative;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.line-col {
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+
+.dot {
+  position: absolute;
+  left: 50%;
+  width: 12rpx;
+  height: 12rpx;
+  margin-left: -6rpx;
+  border-radius: 50%;
+  background: #2d6cff;
+  z-index: 2;
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 40rpx;
+  background: linear-gradient(180deg, rgba(45, 108, 255, 0.2) 0%, rgba(45, 108, 255, 0.1) 100%);
+  clip-path: polygon(0% 100%, 16.66% 60%, 33.33% 70%, 50% 30%, 66.66% 40%, 83.33% 20%, 100% 80%, 100% 100%);
+  z-index: 1;
+}
+
+.current-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 40rpx;
+  width: 2rpx;
+  background: #4caf50;
+  z-index: 3;
+}
+
+.trend-tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12rpx 16rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.trend-tooltip-date {
+  font-size: 22rpx;
+  opacity: 0.8;
+  margin-bottom: 4rpx;
+}
+
+.trend-tooltip-detail {
+  font-size: 22rpx;
+  margin-bottom: 4rpx;
+}
+
+.trend-tooltip-amount {
+  font-size: 24rpx;
+  font-weight: bold;
+  margin-top: 4rpx;
+  padding-top: 4rpx;
+  border-top: 1rpx solid rgba(255, 255, 255, 0.3);
+}
+
+.line-date {
+  position: absolute;
+  bottom: 8rpx;
+  width: 100%;
+  color: #8a94a6;
+  font-size: 22rpx;
+}
+
+.ring-container {
+  position: relative;
+  margin: 10rpx auto 16rpx;
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  position: relative;
+}
+
+.ring::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 130rpx;
+  height: 130rpx;
+  margin-left: -65rpx;
+  margin-top: -65rpx;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 1;
+}
+
+.ring-segment {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.ring-segment:active {
+  opacity: 0.8;
+}
+
+.ring-tooltip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 16rpx;
+  border-radius: 12rpx;
+  z-index: 10;
+  text-align: center;
+}
+
+.tooltip-title {
+  font-size: 22rpx;
+  margin-bottom: 8rpx;
+}
+
+.tooltip-value {
+  font-size: 28rpx;
+  font-weight: 600;
+  margin-bottom: 4rpx;
+}
+
+.tooltip-amount {
+  font-size: 24rpx;
+  margin-bottom: 4rpx;
+}
+
+.tooltip-percentage {
+  font-size: 24rpx;
+  color: #4caf50;
+  font-weight: 600;
+}
+
+.legend-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14rpx 22rpx;
+}
+
+.legend-item {
+  font-size: 24rpx;
+  color: #4f586a;
+}
+
+.legend-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 8rpx;
+}
+
+.ai-head {
+  margin: 6rpx 0 14rpx;
+}
+
+.ai-card {
+  background: linear-gradient(135deg, #1b56ff, #0f90ff);
+  color: #fff;
+}
+
+.ai-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.ai-icon {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 10rpx;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  position: relative;
+}
+
+.ai-icon-wrap {
+  width: 36rpx;
+  height: 36rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.ai-desc {
+  margin-top: 14rpx;
+  line-height: 1.7;
+  font-size: 24rpx;
+  opacity: 0.95;
+}
+
+.investment-wrap {
+  margin-top: 10rpx;
+}
+
+.investment-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f2f5;
+}
+
+.investment-item:last-child {
+  border-bottom: none;
+}
+
+.investment-name {
+  font-size: 26rpx;
+  color: #333;
+}
+
+.investment-value {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: #1d5fff;
+}
+
+.config-btn {
+  margin-top: 24rpx;
+  width: 100%;
+  height: 80rpx;
+  background: #1d5fff;
+  color: #fff;
+  font-size: 28rpx;
+  font-weight: 600;
+  border-radius: 40rpx;
+  border: none;
+}
+
+.config-btn::after {
+  border: none;
+}
+
+.internship-desc {
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #666;
+  margin-top: 8rpx;
+}

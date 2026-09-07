@@ -1,0 +1,107 @@
+<view class="page">
+  <view class="time">{{currentTime}}</view>
+  <view class="top-row">
+    <view class="title">智能分析</view>
+    <view class="toggle-wrap">
+      <view class="toggle {{timeRange === 'month' ? 'active' : ''}}" bindtap="switchTimeRange" data-range="month">月度</view>
+      <view class="toggle {{timeRange === 'quarter' ? 'active' : ''}}" bindtap="switchTimeRange" data-range="quarter">季度</view>
+    </view>
+  </view>
+
+  <view class="card line-card" bindtap="toggleTodayIncomeCard">
+    <view class="head">收支趋势</view>
+    <view class="line-wrap" bindtap="hideTrendTooltip">
+      <view class="grid"></view>
+      <view class="line-container">
+        <view wx:for="{{trendPoints}}" wx:key="key" class="line-col">
+          <view class="dot" style="top: {{item.top}}rpx;" bindtap="showTrendTooltip" data-date="{{item.key}}" data-income="{{item.income}}" data-expense="{{item.expense}}" data-value="{{item.value}}" data-index="{{index}}"></view>
+          <view class="line-date">{{item.key}}</view>
+        </view>
+        <view class="line" wx:if="{{clipPath}}" style="clip-path: {{clipPath}};"></view>
+        <view class="current-line"></view>
+        <view class="trend-tooltip" wx:if="{{trendTooltipVisible}}" style="top: {{trendTooltipTop}}rpx; left: {{trendTooltipLeft}}rpx;">
+          <view class="trend-tooltip-date">{{trendTooltipDate}}</view>
+          <view class="trend-tooltip-detail">收入：¥{{trendTooltipIncome}}</view>
+          <view class="trend-tooltip-detail">支出：¥{{trendTooltipExpense}}</view>
+          <view class="trend-tooltip-amount">结余：¥{{trendTooltipValue}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{showTodayIncomeCard}}" class="card today-income-card">
+    <view class="head">今日收入情况</view>
+    <view class="today-row">
+      <view class="today-item">
+        <view class="today-label">今日收入</view>
+        <view class="today-income">¥{{todayIncome}}</view>
+      </view>
+      <view class="today-item">
+        <view class="today-label">今日支出</view>
+        <view class="today-expense">¥{{todayExpense}}</view>
+      </view>
+      <view class="today-item">
+        <view class="today-label">今日结余</view>
+        <view class="today-balance">¥{{todayBalance}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="head">支出分布</view>
+    <view class="ring-container">
+      <view class="ring" style="background: conic-gradient({{conicGradient}});"></view>
+      <!-- 饼图各部分的点击区域 -->
+      <view wx:for="{{ringSegments}}" wx:key="name" 
+        class="ring-segment" 
+        style="clip-path: polygon(50% 50%, {{50 + 50 * Math.cos((item.startAngle - 90) * Math.PI / 180)}}% {{50 + 50 * Math.sin((item.startAngle - 90) * Math.PI / 180)}}%, {{50 + 50 * Math.cos((item.endAngle - 90) * Math.PI / 180)}}% {{50 + 50 * Math.sin((item.endAngle - 90) * Math.PI / 180)}}%)"
+        bindtap="showTooltip" 
+        data-category="{{item.name}}" 
+        data-amount="¥{{item.value.toFixed(2)}}" 
+        data-percentage="{{item.percentage}}%">
+      </view>
+      <view class="ring-tooltip" wx:if="{{tooltipVisible}}">
+        <view class="tooltip-title">支出分类</view>
+        <view class="tooltip-value">{{tooltipCategory}}</view>
+        <view class="tooltip-amount">{{tooltipAmount}}</view>
+        <view class="tooltip-percentage">{{tooltipPercentage}}</view>
+      </view>
+    </view>
+    <view class="legend-wrap">
+      <view wx:for="{{ringLegend}}" wx:key="name" class="legend-item">
+        <text class="legend-dot" style="background: {{item.color}};"></text>
+        <text>{{item.name}} ({{item.percentage}}%)</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="head ai-head">AI 专属规划建议</view>
+  <view class="card ai-card">
+    <view class="ai-title">
+      <view class="ai-icon-wrap">
+        <image class="head-icon-img" src="/images/analysis-icons/cap.svg" mode="aspectFit"></image>
+      </view>
+      {{suggestPlan.title}}
+    </view>
+    <view class="ai-desc">{{suggestPlan.desc}}</view>
+  </view>
+
+  <view class="card">
+    <view class="head">
+      <image class="head-icon-img" src="/images/analysis-icons/asset.svg" mode="aspectFit"></image>
+      结余稳健增值
+      <text class="ai-config">AI配置</text>
+    </view>
+    <view class="investment-wrap">
+      <view wx:if="{{totalExpense > 0}}" class="investment-item">
+        <view class="investment-name">建议优先压缩最高支出分类</view>
+        <view class="investment-value">基于真实账单自动计算</view>
+      </view>
+      <view wx:else class="investment-item">
+        <view class="investment-name">暂无可配置建议</view>
+        <view class="investment-value">请先记账</view>
+      </view>
+      <button class="config-btn" bindtap="generateConfigSuggestion">一键配置建议</button>
+    </view>
+  </view>
+</view>
