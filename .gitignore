@@ -1,9 +1,26 @@
+# WeChat DevTools local/private settings
 project.private.config.json
+
+# Generated exports and local artifacts
+records_export.csv
+*.log
+
+# Dependencies and editor metadata
 node_modules/
 .env
 .env.*
-*.pem
-*.key
-*.log
-records_export.csv
 .DS_Store
+.idea/
+.vscode/
+
+# Dynamics 365 Business Central artifacts
+.alcache/
+.alpackages/
+.snapshots/
+.output/
+*.app
+rad.json
+*.g.xlf
+*.bclicense
+*.flf
+TestResults.xml

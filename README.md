@@ -18,9 +18,11 @@
 
 ## 百度 OCR 与语音识别配置（可选）
 
-拍照识单和语音记账需要百度智能云凭据。请在发布前将
-`miniprogram/pages/home/index.js` 中的百度 OCR 和语音配置替换为你自己的凭据，
-并确保不要将真实密钥提交到公开仓库。
+拍照识单和语音记账需要百度智能云凭据。复制
+`miniprogram/config/baidu.example.js` 为 `miniprogram/config/baidu.js`，
+再填入你自己的 API Key 和 Secret Key。`baidu.js` 已被 Git 忽略，不会提交到仓库。
+
+未配置凭据时，其余记账、分析、目标和学习功能仍可正常使用。
 
 ## 数据存储
 
